@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productList.mapper.TProductMapper">
+    
+    <resultMap type="TProduct" id="TProductResult">
+        <result property="productId"    column="product_id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productPrice"    column="product_price"    />
+        <result property="productCount"    column="product_count"    />
+        <result property="productImg"    column="product_img"    />
+        <result property="productSize"    column="product_size"    />
+        <result property="productCreateTime"    column="product_create_time"    />
+        <result property="productBrand"    column="product_brand"    />
+        <result property="productTypeId"    column="product_type_id"    />
+        <result property="productTypeName" column="type_name" />
+        <result property="productPackage"    column="product_package"    />
+        <result property="productSign"    column="product_sign"    />
+        <result property="productSugar"    column="product_sugar"    />
+        <result property="productStatus"    column="product_status"    />
+        <result property="productDescribe"    column="product_describe"    />
+
+    </resultMap>
+
+    <sql id="selectTProductVo">
+        select product_id, product_name, product_price, product_count, product_img, product_size, product_create_time, product_brand, product_type_id, product_package, product_sign, product_sugar, product_status from t_product
+    </sql>
+    <sql id="selectTProductListVo">
+        SELECT
+            product_id,
+            product_name,
+            product_price,
+            product_count,
+            product_img,
+            product_size,
+            product_create_time,
+            product_brand,
+            product_type_id,
+            product_package,
+            product_sign,
+            product_sugar,
+            product_status,
+            product_describe,
+            type_name
+        FROM
+            t_product
+                INNER JOIN
+            t_product_type
+            ON
+                t_product.product_type_id = t_product_type.type_id  </sql>
+
+    <select id="selectTProductList" parameterType="TProduct" resultMap="TProductResult">
+        <include refid="selectTProductListVo"/>
+        <where>  
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="beginProductPrice != null and endProductPrice != null"> and product_price between #{beginProductPrice} and #{endProductPrice}</if>
+            <if test="productTypeId != null "> and product_type_id = #{productTypeId}</if>
+            <if test="productStatus != null "> and product_status = #{productStatus}</if>
+        </where>
+        <if test="productSort != null">
+            <choose>
+                <when test="productSort == 0">ORDER BY product_price ASC</when> <!-- 升序 -->
+                <when test="productSort == 1">ORDER BY product_price DESC</when> <!-- 降序 -->
+                <otherwise>ORDER BY product_id asc</otherwise> <!-- 默认按ID升序 -->
+            </choose>
+        </if>
+    </select>
+    
+    <select id="selectTProductByProductId" parameterType="Long" resultMap="TProductResult">
+        <include refid="selectTProductListVo"/>
+        where product_id = #{productId}
+    </select>
+
+    <insert id="insertTProduct" parameterType="TProduct" useGeneratedKeys="true" keyProperty="productId">
+        insert into t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productName != null and productName != ''">product_name,</if>
+            <if test="productPrice != null">product_price,</if>
+            <if test="productCount != null">product_count,</if>
+            <if test="productImg != null">product_img,</if>
+            <if test="productSize != null">product_size,</if>
+            <if test="productCreateTime != null">product_create_time,</if>
+            <if test="productBrand != null">product_brand,</if>
+            <if test="productTypeId != null">product_type_id,</if>
+            <if test="productPackage != null">product_package,</if>
+            <if test="productSign != null">product_sign,</if>
+            <if test="productSugar != null">product_sugar,</if>
+            <if test="productStatus != null">product_status,</if>
+            <if test="productDescribe != null">product_describe,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productName != null and productName != ''">#{productName},</if>
+            <if test="productPrice != null">#{productPrice},</if>
+            <if test="productCount != null">#{productCount},</if>
+            <if test="productImg != null">#{productImg},</if>
+            <if test="productSize != null">#{productSize},</if>
+            <if test="productCreateTime != null">#{productCreateTime},</if>
+            <if test="productBrand != null">#{productBrand},</if>
+            <if test="productTypeId != null">#{productTypeId},</if>
+            <if test="productPackage != null">#{productPackage},</if>
+            <if test="productSign != null">#{productSign},</if>
+            <if test="productSugar != null">#{productSugar},</if>
+            <if test="productStatus != null">#{productStatus},</if>
+            <if test="productDescribe != null">#{productDescribe},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTProduct" parameterType="TProduct">
+        update t_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productName != null and productName != ''">product_name = #{productName},</if>
+            <if test="productPrice != null">product_price = #{productPrice},</if>
+            <if test="productCount != null">product_count = #{productCount},</if>
+            <if test="productImg != null">product_img = #{productImg},</if>
+            <if test="productSize != null">product_size = #{productSize},</if>
+            <if test="productCreateTime != null">product_create_time = #{productCreateTime},</if>
+            <if test="productBrand != null">product_brand = #{productBrand},</if>
+            <if test="productTypeId != null">product_type_id = #{productTypeId},</if>
+            <if test="productPackage != null">product_package = #{productPackage},</if>
+            <if test="productSign != null">product_sign = #{productSign},</if>
+            <if test="productSugar != null">product_sugar = #{productSugar},</if>
+            <if test="productStatus != null">product_status = #{productStatus},</if>
+            <if test="productDescribe != null">product_describe = #{productDescribe},</if>
+        </trim>
+        where product_id = #{productId}
+    </update>
+
+    <delete id="deleteTProductByProductId" parameterType="Long">
+        delete from t_product where product_id = #{productId}
+    </delete>
+
+    <delete id="deleteTProductByProductIds" parameterType="String">
+        delete from t_product where product_id in 
+        <foreach item="productId" collection="array" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </delete>
+</mapper>

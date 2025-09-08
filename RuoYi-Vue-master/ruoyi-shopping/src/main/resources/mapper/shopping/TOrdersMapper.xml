@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.orderList.mapper.TOrdersMapper">
+    
+    <resultMap type="TOrders" id="TOrdersResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="orderUserId"    column="order_user_id"    />
+        <result property="orderMoney"    column="order_money"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="orderAddTime"    column="order_add_time"    />
+        <result property="orderUserNickName"    column="user_nick_name"    />
+    </resultMap>
+
+    <sql id="selectTOrdersVo">
+        select order_id, order_user_id, order_money, order_status, order_add_time from t_orders
+    </sql>
+
+    <sql id="selectTOrdersIUNVo">
+        SELECT
+            order_id,
+            order_user_id,
+            order_money,
+            order_status,
+            order_add_time,
+            user_nick_name
+        FROM
+            t_orders
+                INNER JOIN
+            t_user
+            on
+                t_user.user_id = t_orders.order_user_id
+    </sql>
+
+    <select id="selectTOrdersList" parameterType="TOrders" resultMap="TOrdersResult">
+        <include refid="selectTOrdersIUNVo"/>
+        <where>  
+            <if test="orderUserNickName != null "> and user_nick_name = #{orderUserNickName}</if>
+            <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+            <if test="params.beginOrderAddTime != null and params.beginOrderAddTime != '' and params.endOrderAddTime != null and params.endOrderAddTime != ''"> and order_add_time between #{params.beginOrderAddTime} and #{params.endOrderAddTime}</if>
+        </where>
+    </select>
+
+    <select id="selectUpdateOrderId" parameterType="Long" resultMap="TOrdersResult">
+        <include refid="selectTOrdersIUNVo"/>
+        ORDER BY order_add_time DESC
+        limit  1
+    </select>
+    
+    <select id="selectTOrdersByOrderId" parameterType="Long" resultMap="TOrdersResult">
+        <include refid="selectTOrdersIUNVo"/>
+        where order_id = #{orderId}
+    </select>
+
+    <insert id="insertTOrders" parameterType="TOrders" useGeneratedKeys="true" keyProperty="orderId">
+        insert into t_orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderUserId != null">order_user_id,</if>
+            <if test="orderMoney != null">order_money,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="orderAddTime != null">order_add_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderUserId != null">#{orderUserId},</if>
+            <if test="orderMoney != null">#{orderMoney},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="orderAddTime != null">#{orderAddTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTOrders" parameterType="TOrders">
+        update t_orders
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderUserId != null">order_user_id = #{orderUserId},</if>
+            <if test="orderMoney != null">order_money = #{orderMoney},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="orderAddTime != null">order_add_time = #{orderAddTime},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deleteTOrdersByOrderId" parameterType="Long">
+        delete from t_orders where order_id = #{orderId}
+    </delete>
+
+    <delete id="deleteTOrdersByOrderIds" parameterType="String">
+        delete from t_orders where order_id in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

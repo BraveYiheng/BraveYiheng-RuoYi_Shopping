@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.ordersDetail.mapper.TOrderDetailMapper">
+
+    <resultMap type="TOrderDetail" id="TOrderDetailResult">
+        <result property="orderDetailId"    column="order_detail_id"    />
+        <result property="orderProductId"    column="order_product_id"    />
+        <result property="orderProductName"    column="product_name"    />
+        <result property="orderProductCount"    column="order_product_count"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="orderProductImage"    column="product_img"    />
+        <result property="orderUserName"    column="user_nick_name"    />
+        <result property="orderProductDesc"    column="product_describe"    />
+        <result property="orderProductPrice"    column="product_price"    />
+        <result property="orderStatus"    column="order_status"    />
+    </resultMap>
+
+    <sql id="selectTOrderDetailVo">
+        select order_detail_id, order_product_id, order_product_count, order_id from t_order_detail
+    </sql>
+    <sql id="selectTOrderDetailIncludeUserAndProductAndOrdersVo">
+        SELECT
+            order_detail_id,
+            order_product_id,
+            order_product_count,
+            t_orders.order_id,
+            product_name,
+            user_nick_name,
+            product_img,
+            t_orders.order_user_id,
+            product_price,
+            product_describe,
+            order_status
+        FROM
+            t_order_detail
+                left JOIN t_product ON t_order_detail.order_product_id = t_product.product_id
+                left JOIN t_orders ON t_order_detail.order_id = t_orders.order_id
+                left JOIN t_user ON t_user.user_id = t_orders.order_user_id
+    </sql>
+
+    <select id="selectTOrderDetailList" parameterType="TOrderDetail" resultMap="TOrderDetailResult">
+        <include refid="selectTOrderDetailIncludeUserAndProductAndOrdersVo"/>
+        <where>
+            <if test="orderProductName != null "> and product_name = #{orderProductName}</if>
+            <if test="orderProductCount != null "> and order_product_count = #{orderProductCount}</if>
+            <if test="orderUserName != null "> and user_nick_name = #{orderUserName}</if>
+            <if test="orderUserId != null "> and order_user_id = #{orderUserId}</if>
+            <if test="orderId != null "> and t_orders.order_id = #{orderId}</if>
+            <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectTOrderDetailByOrderDetailId" parameterType="Long" resultMap="TOrderDetailResult">
+        <include refid="selectTOrderDetailIncludeUserAndProductAndOrdersVo"/>
+        where order_detail_id = #{orderDetailId}
+    </select>
+
+
+    <insert id="insertTOrderDetail" parameterType="TOrderDetail" useGeneratedKeys="true" keyProperty="orderDetailId">
+        insert into t_order_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderProductId != null">order_product_id,</if>
+            <if test="orderProductCount != null">order_product_count,</if>
+            <if test="orderId != null">order_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderProductId != null">#{orderProductId},</if>
+            <if test="orderProductCount != null">#{orderProductCount},</if>
+            <if test="orderId != null">#{orderId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTOrderDetail" parameterType="TOrderDetail">
+        update t_order_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderProductId != null">order_product_id = #{orderProductId},</if>
+            <if test="orderProductCount != null">order_product_count = #{orderProductCount},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+        </trim>
+        where order_detail_id = #{orderDetailId}
+    </update>
+
+    <delete id="deleteTOrderDetailByOrderDetailId" parameterType="Long">
+        delete from t_order_detail where order_detail_id = #{orderDetailId}
+    </delete>
+
+    <delete id="deleteTOrderDetailByOrderDetailIds" parameterType="String">
+        delete from t_order_detail where order_detail_id in 
+        <foreach item="orderDetailId" collection="array" open="(" separator="," close=")">
+            #{orderDetailId}
+        </foreach>
+    </delete>
+</mapper>

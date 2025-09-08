@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.address.mapper.TAddressMapper">
+    
+    <resultMap type="TAddress" id="TAddressResult">
+        <result property="addressId"    column="address_id"    />
+        <result property="address"    column="address"    />
+        <result property="addressUserId"    column="address_user_id"    />
+        <result property="addressUserNickName"    column="user_nick_name"    />
+        <result property="addressIsfo"    column="address_isfo"    />
+        <result property="phone"    column="phone"    />
+    </resultMap>
+
+    <sql id="selectTAddressVo">
+        select address_id, address, address_user_id, address_isfo from t_address
+    </sql>
+
+    <sql id="selectTAddressIUNVo">
+        SELECT
+            address_id,
+            address,
+            address_user_id,
+            address_isfo,
+            user_nick_name,
+            phone
+        FROM
+            t_address
+                INNER JOIN
+            t_user
+            on
+                t_user.user_id = t_address.address_user_id
+    </sql>
+
+    <select id="selectTAddressList" parameterType="TAddress" resultMap="TAddressResult">
+        <include refid="selectTAddressIUNVo"/>
+        <where>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
+            <if test="addressUserId != null and addressUserId != ''"> and address_user_id = #{addressUserId}</if>
+            <if test="addressIsfo != null and addressIsfo != ''"> and address_isfo = #{addressIsfo}</if>
+            <if test="addressUserNickName != null and addressUserNickName != ''"> and user_nick_name like concat('%', #{addressUserNickName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectTAddressByAddressId" parameterType="Long" resultMap="TAddressResult">
+        <include refid="selectTAddressIUNVo"/>
+        where address_id = #{addressId}
+    </select>
+
+    <insert id="insertTAddress" parameterType="TAddress" useGeneratedKeys="true" keyProperty="addressId">
+        insert into t_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="address != null">address,</if>
+            <if test="addressUserId != null">address_user_id,</if>
+            <if test="addressIsfo != null">address_isfo,</if>
+            <if test="phone != null"> phone,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="address != null">#{address},</if>
+            <if test="addressUserId != null">#{addressUserId},</if>
+            <if test="addressIsfo != null">#{addressIsfo},</if>
+            <if test="phone != null">#{phone},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTAddress" parameterType="TAddress">
+        update t_address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="address != null">address = #{address},</if>
+            <if test="addressUserId != null">address_user_id = #{addressUserId},</if>
+            <if test="addressIsfo != null">address_isfo = #{addressIsfo},
+            </if>
+            <if test="phone != null">phone = #{phone},</if>
+        </trim>
+        where address_id = #{addressId}
+    </update>
+
+    <delete id="deleteTAddressByAddressId" parameterType="Long">
+        delete from t_address where address_id = #{addressId}
+    </delete>
+
+    <delete id="deleteTAddressByAddressIds" parameterType="String">
+        delete from t_address where address_id in 
+        <foreach item="addressId" collection="array" open="(" separator="," close=")">
+            #{addressId}
+        </foreach>
+    </delete>
+</mapper>
