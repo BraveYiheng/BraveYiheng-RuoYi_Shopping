@@ -1,0 +1,172 @@
+/** index.wxss **/
+
+/* 页面根元素样式，设置页面高度为100vh，使用flex布局纵向排列 */
+page {
+  height: 100vh; /* 页面高度占满视口 */
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+}
+
+/** 首页页面样式 **/
+
+/* 整个页面容器，设置为纵向排列，背景色为浅灰色，撑满全屏 */
+.home-container {
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+  background: #f7f7f7; /* 浅灰色背景 */
+  min-height: 100vh; /* 最小高度撑满全屏 */
+}
+
+/* 顶部搜索框区域，背景色与导航栏一致，内边距适中 */
+.search-bar {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  background: #F7F7F7; /* 主色背景 */
+  padding: 18rpx 24rpx 18rpx 24rpx; /* 上右下左内边距 */
+  height: 64rpx;
+
+}
+.search-bar button{
+  height: 100%;
+  border: 2rpx solid #222831;
+  border-radius: 50px;
+  font-size: 14px;
+  text-align: center;
+  width: 140px;
+}
+
+/* 搜索图标，左圆角 */
+.search-icon {
+  width: 71rpx;
+  display: block; 
+  box-sizing: border-box;
+  background-color: #fff;
+  padding-top: 8rpx;
+  padding-left: 8rpx;
+  border-radius: 32rpx 0 0 32rpx;
+  height: 69rpx;
+  /* 新增：右侧边框 */
+  border-left: 2rpx solid #222831;
+  border-top: 2rpx solid #222831;
+  border-bottom: 2rpx solid #222831;
+}
+
+/* 搜索输入框，圆角，白底，左内边距，字体适中，无边框 */
+.search-input {
+  height: 69rpx; 
+  display: block; 
+  box-sizing: border-box; 
+  width: 700px;
+  border-radius: 0 32rpx 32rpx 0; /* 圆角 */
+  background: rgb(255, 255, 255); /* 白色背景 */
+  padding-left: 24rpx; /* 左内边距 */
+  font-size: 28rpx; /* 字体大小 */
+  border-right: 2rpx solid #222831;
+  border-top: 2rpx solid #222831;
+  border-bottom: 2rpx solid #222831;
+  margin-right: 2px;
+}
+
+/* 轮播图容器，宽度自适应，圆角，阴影，白底，居中显示 */
+.banner-swiper {
+  width: 97vw; /* 宽度为视口92% */
+  height: 320rpx; /* 高度 */
+  margin: 24rpx auto 0 auto; /* 上外边距，左右居中 */
+  border-radius: 16rpx; /* 圆角 */
+  overflow: hidden; /* 超出部分隐藏 */
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06); /* 阴影效果 */
+  background: #fff; /* 白色背景 */
+}
+
+/* 轮播图图片，宽高100%，自适应填充 */
+.banner-img {
+  width: 100%; /* 宽度100% */
+  height: 320rpx; /* 高度与容器一致 */
+  display: block; /* 块级显示 */
+}
+
+/* 商品列表区域，flex布局，两列排列，左右留白 */
+.goods-list {
+  display: flex; /* 使用flex布局 */
+  flex-wrap: wrap; /* 自动换行 */
+  justify-content: space-between; /* 两端对齐 */
+  padding: 24rpx 16rpx 0 16rpx; /* 上右下左内边距 */
+}
+
+/* 单个商品卡片，宽度48%，圆角，白底，阴影，竖直排列 */
+.goods-item {
+  width: 49%; /* 占据父容器一半宽度 */
+  background: #fff; /* 白色背景 */
+  border-radius: 16rpx; /* 圆角 */
+  margin-bottom: 16rpx; /* 下外边距 */
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04); /* 阴影 */
+  overflow: hidden; /* 超出部分隐藏 */
+  display: flex; /* flex布局 */
+  flex-direction: column; /* 垂直排列 */
+}
+
+/* 商品图片，宽高100%，自适应裁剪 */
+.goods-img {
+  width: 100%; /* 宽度100% */
+  height: 200rpx; /* 高度 */
+  object-fit: cover; /* 保持比例裁剪填充 */
+}
+
+/* 商品信息区域，内边距适中 */
+.goods-info {
+  padding: 16rpx 12rpx 12rpx 12rpx; /* 上右下左内边距 */
+}
+
+/* 商品标题，字体稍大，颜色较深，底部留间距 */
+.goods-title {
+  font-size: 28rpx; /* 字体大小 */
+  color: #222; /* 深色字体 */
+  margin-bottom: 8rpx; /* 下间距 */
+  font-weight: 500; /* 字体加粗 */
+}
+.goods-title text{
+  font-weight: bold;
+}
+.goods-desc {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.goods-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+.brand, .size, .package {
+  font-size: 12px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sign {
+  font-size: 20rpx;
+  color: #e64340;
+  border: 1px solid #e64340;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+/* 商品价格，主色高亮，字体加粗 */
+.goods-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.price {
+  color: #e64340;
+  font-size: 16px;
+  font-weight: bold;
+}

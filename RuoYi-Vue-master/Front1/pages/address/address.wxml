@@ -1,0 +1,66 @@
+<view class="address-list">
+  <block wx:if="{{addressList.length > 0}}">
+    <block wx:for="{{addressList}}" wx:key="addressId">
+      <view class="address-item">
+        <view class="address-info">
+          <view class="address-user">
+            <text class="name">姓名：{{item.addressUserNickName}}</text>
+            <text wx:if="{{item.addressIsfo == 0}}" class="default-tag">默认</text>
+          </view>
+          <view class="address-detail">电话：{{item.phone}}</view>
+          <view class="address-detail">收货地址：{{item.address}}</view>
+        </view>
+        <view class="address-actions">
+          <button wx:if="{{item.addressIsfo != 0}}" 
+                  class="set-default-btn" 
+                  data-id="{{item.addressId}}" 
+                  bindtap="setDefaultAddress">设为默认</button>
+          <button class="edit-btn" 
+                  data-id="{{item.addressId}}" 
+                  data-address="{{item.address}}"
+                  data-name="{{item.addressUserNickName}}"
+                  data-phone="{{item.phone}}"
+                  bindtap="showEditDialog">编辑</button>
+          <button class="delete-btn" 
+                  data-id="{{item.addressId}}" 
+                  bindtap="deleteAddress">删除</button>
+        </view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view class="no-address">
+      <text>暂无地址</text>
+    </view>
+  </block>
+  <button class="add-address-btn" bindtap="showAddDialog">添加新地址</button>
+
+  <!-- 编辑地址对话框 -->
+  <view class="dialog" wx:if="{{showDialog}}">
+    <view class="dialog-mask" bindtap="hideDialog"></view>
+    <view class="dialog-content">
+      <view class="dialog-header">
+        <text>{{isEdit ? '编辑地址' : '新增地址'}}</text>
+        <text class="close-btn" bindtap="hideDialog">×</text>
+      </view>
+      <view class="dialog-body">
+        <view class="form-item">
+          <text class="label">收货人</text>
+          <input class="input" value="{{form.name}}" bindinput="inputName" placeholder="请输入收货人姓名"/>
+        </view>
+        <view class="form-item">
+          <text class="label">手机号</text>
+          <input class="input" type="number" value="{{form.phone}}" bindinput="inputPhone" placeholder="请输入手机号"/>
+        </view>
+        <view class="form-item">
+          <text class="label">详细地址</text>
+          <textarea class="textarea" value="{{form.address}}" bindinput="inputAddress" placeholder="请输入详细地址"/>
+        </view>
+      </view>
+      <view class="dialog-footer">
+        <button class="cancel-btn" bindtap="hideDialog">取消</button>
+        <button class="confirm-btn" bindtap="submitForm">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,197 @@
+/* 页面根元素样式，设置页面高度为100vh，使用flex布局纵向排列 */
+page {
+  height: 100vh; /* 页面高度占满视口 */
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+}
+
+/** 首页页面样式 **/
+
+/* 整个页面容器，设置为纵向排列，背景色为浅灰色，撑满全屏 */
+.home-container {
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+  height: 100vh;
+  background: #f5f5f5;
+}
+/* 顶部搜索框区域，背景色与导航栏一致，内边距适中 */
+.search-bar {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  background: #F7F7F7; /* 主色背景 */
+  padding: 18rpx 24rpx 18rpx 24rpx; /* 上右下左内边距 */
+  height: 64rpx;
+
+}
+.search-bar button{
+  height: 100%;
+  border: 2rpx solid #222831;
+  border-radius: 50px;
+  font-size: 14px;
+  text-align: center;
+  width: 140px;
+}
+
+/* 搜索图标，左圆角 */
+.search-icon {
+  width: 71rpx;
+  display: block; 
+  box-sizing: border-box;
+  background-color: #fff;
+  padding-top: 8rpx;
+  padding-left: 8rpx;
+  border-radius: 32rpx 0 0 32rpx;
+  height: 69rpx;
+  /* 新增：右侧边框 */
+  border-left: 2rpx solid #222831;
+  border-top: 2rpx solid #222831;
+  border-bottom: 2rpx solid #222831;
+}
+
+/* 搜索输入框，圆角，白底，左内边距，字体适中，无边框 */
+.search-input {
+  height: 69rpx; 
+  display: block; 
+  box-sizing: border-box; 
+  width: 700px;
+  border-radius: 0 32rpx 32rpx 0; /* 圆角 */
+  background: rgb(255, 255, 255); /* 白色背景 */
+  padding-left: 24rpx; /* 左内边距 */
+  font-size: 28rpx; /* 字体大小 */
+  border-right: 2rpx solid #222831;
+  border-top: 2rpx solid #222831;
+  border-bottom: 2rpx solid #222831;
+  margin-right: 2px;
+}
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.category-list {
+  width: 80px;
+  background: #fff;
+  height: 100%;
+}
+.category-item {
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+}
+.category-item.active {
+  color: #e64340;
+  background: #f5f5f5;
+  border-left: 3px solid #e64340;
+}
+.goods-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin-left: 1px;
+}
+.tabs {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  position: relative;
+}
+.tab.active {
+  color: #e64340;
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: #e64340;
+}
+.goods-list {
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  padding: 10px;
+}
+.goods-item {
+  display: flex;
+  padding: 10px;
+  background: #fff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.goods-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.goods-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.goods-title {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.goods-desc {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.goods-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+.brand, .size, .package {
+  font-size: 12px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.goods-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  color: #e64340;
+  font-size: 16px;
+  font-weight: bold;
+}
+.sign {
+  font-size: 12px;
+  color: #e64340;
+  border: 1px solid #e64340;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.cart-icon {
+  color: #e64340;
+  margin-left: 10px;
+}

@@ -1,0 +1,34 @@
+<view class="detail-container">
+  <image class="detail-img" src="{{product.productImg}}" mode="aspectFill"/>
+  <view class="detail-header">
+    <view class="detail-title">{{product.productName}}</view>
+    <view class="detail-tags">
+      <text class="sign" wx:if="{{product.productSign}}">{{product.productSign}}</text>
+    </view>
+    <view class="detail-price-row">
+      <text class="detail-price">￥{{product.productPrice}}</text>
+      <text class="detail-origin-price" wx:if="{{product.productOriginPrice}}">￥{{product.productOriginPrice}}</text>
+    </view>
+  </view>
+  <view class="detail-desc">{{product.productDescribe}}</view>
+  <view class="detail-meta">
+    <view>品牌：{{product.productBrand}}</view>
+    <view>规格：{{product.productSize}}</view>
+    <view>包装：{{product.productPackage}}</view>
+    <view>产地：{{product.productOrigin}}</view>
+    <view>库存：{{product.productCount}}</view>
+    <view wx:if="{{product.productSales}}">销量：{{product.productSales}}</view>
+  </view>
+  <view class="detail-ops">
+    <button class="share-btn">分享</button>
+    <button class="fav-btn">收藏</button>
+  </view>
+  <view class="detail-select">
+    <view>选择：已选 {{product.productName}}</view>
+    <view>生产日期：{{product.productDate}}</view>
+  </view>
+  <view class="detail-actions">
+    <button class="cart-btn" bindtap="addToCart">加入购物车</button>
+    <button class="buy-btn" bindtap="buyNow">立即购买</button>
+  </view>
+</view>

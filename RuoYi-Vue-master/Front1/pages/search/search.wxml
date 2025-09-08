@@ -1,0 +1,19 @@
+<!--pages/search/search.wxml-->
+<view class="search-container">
+  <view class="search-bar">
+    <icon  type="search"  color="#aaa" class="search-icon" />
+    <input style="" class="search-input" placeholder="搜索商品" bindinput="onInput" value="{{searchName}}" confirm-type="search" bindconfirm="onSearch" />
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+</view>
+<view class="goods-list">
+  <view class="goods-item" wx:for="{{productList}}" wx:key="{{productId}}" data-id="{{item.productId}}" bindtap="goToProductInfo">
+    <image style="width: 348rpx; height: 199rpx; display: block; box-sizing: border-box" class="goods-img" src="http://localhost:8081{{item.productImg}}" mode="aspectFill" />
+    <view class="goods-info">
+      <view class="goods-title">
+        <text>{{item.productName}}</text>
+      </view>
+      <view class="goods-price">¥{{item.productPrice}}</view>
+    </view>
+  </view>
+</view>

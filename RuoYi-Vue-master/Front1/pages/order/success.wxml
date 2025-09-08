@@ -1,0 +1,12 @@
+<view class="success-container">
+  <view class="success-icon">
+    <icon type="success" size="64" color="#00adb5"/>
+  </view>
+  <view class="success-title">支付成功</view>
+  <view class="success-desc">您的订单已支付成功</view>
+  
+  <view class="button-group">
+    <button class="btn" bindtap="goToOrderCenter">返回订单中心</button>
+    <button class="btn primary" bindtap="goToHome">返回首页</button>
+  </view>
+</view>

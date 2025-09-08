@@ -1,0 +1,51 @@
+<view class="home-container">
+  <!-- 顶部搜索框，背景色与导航栏一致，包含搜索图标和输入框（可输入，点击或回车跳转搜索页） -->
+  <view class="search-bar">
+    <icon  type="search"  color="#aaa" class="search-icon" />
+    <input style="" class="search-input" placeholder="搜索商品" bindinput="onInput" value="{{searchName}}" confirm-type="search" bindconfirm="onSearch" />
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+<!-- 轮播图区域，自动播放 -->
+<view>
+  <swiper class="banner-swiper" 
+        indicator-dots="true" 
+        autoplay="true" 
+        interval="1500" 
+        circular="true">
+  <!-- 循环渲染轮播项 -->
+  <swiper-item wx:for="{{carouselList}}" wx:key="{{carouselId}}">
+    <image style="height: 317rpx; display: block; box-sizing: border-box" 
+           class="banner-img" 
+           src="http://localhost:8081{{item.carouselUrl}}" 
+           mode="aspectFill" />
+  </swiper-item>
+</swiper>
+</view>
+
+
+  <!-- 商品展示区，使用 wx:for 循环渲染多个商品卡片 -->
+  <view class="goods-list" >
+    <view class="goods-item" wx:for="{{productList}}" wx:key="{{productId}}" data-id="{{item.productId}}" bindtap="goToProductInfo">
+      <!-- 商品图片 -->
+      <image style="width: 348rpx; height: 199rpx; display: block; box-sizing: border-box" class="goods-img" src="http://localhost:8081{{item.productImg}}" mode="aspectFill" />
+      <view class="goods-info">
+        <!-- 商品标题 -->
+        <view class="goods-title">
+          <text>{{item.productName}}</text>
+        </view>
+        <view class="goods-desc">{{item.productDescribe}}</view>
+          <view class="goods-detail">
+            <text class="brand">{{item.productBrand}}</text>
+            <text class="size">{{item.productSize}}</text>
+            <text class="package">{{item.productPackage}}</text>
+          </view>
+      </view>
+        <!-- 商品价格 -->
+        <view class="goods-price">
+          <text class="price">￥{{item.productPrice}}</text>
+          <text class="sign" wx:if="{{item.productSign}}">{{item.productSign}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+ 

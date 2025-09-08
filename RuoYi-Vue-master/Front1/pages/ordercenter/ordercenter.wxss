@@ -1,0 +1,168 @@
+/* pages/ordercenter/ordercenter.wxss */
+/* 订单中心页面样式 */
+.order-center{
+  background-color: #f7f7f7;
+  height: 100vh; /* 页面高度占满视口 */
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+}
+/* 顶部标签栏容器 */
+.tabs {
+  display: flex;
+  background: #f7f7f7;
+  /* 标签栏整体样式 */
+}
+
+/* 单个标签项 */
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  color: #888;
+  font-size: 30rpx;
+  transition: font-size 0.2s, font-weight 0.2s;
+}
+
+/* 选中标签：只加粗和变大，不变色 */
+.tab.active {
+  font-size: 38rpx;
+  font-weight: bold;
+  color: black;
+  border-bottom: none;
+}
+
+/* 订单卡片整体 */
+.order-card {
+  width: 90%;
+  background: #fff;
+  margin: 17rpx auto;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 8rpx #999999;
+}
+
+/* 订单头部：订单号和状态 */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(41, 41, 41);
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+  margin-left: 6rpx;
+  font-weight: bold;
+}
+
+/* 订单状态文字 */
+.status {
+  color: #e64340;
+}
+
+/* 商品行：图片+信息 */
+.product-row {
+  display: flex;
+  margin: 10rpx 0;
+}
+
+/* 商品图片（加大） */
+.product-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+  background: #f5f5f5;
+}
+
+/* 商品信息区域 */
+.product-info {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 商品标题 */
+.product-title {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+/* 商品描述 */
+.product-desc {
+  color: #888;
+  font-size: 24rpx;
+  margin: 6rpx 0;
+}
+
+/* 商品价格 */
+.product-price {
+  color: #e64340;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+/* 订单底部区域：分为两行 */
+.order-footer {
+  margin-top: 9rpx;
+  margin-bottom: 9rpx;
+  padding-top: 8rpx;
+}
+
+/* 实付款独占一行 */
+.order-footer-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+/* 按钮行：靠右排列 */
+.order-footer-btns {
+  gap: 12rpx;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+/* 兼容 block 标签影响 flex 布局 */
+.order-footer-btns block {
+  display: contents;
+}
+
+/* 普通按钮样式 */
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+  border-radius: 24rpx;
+  line-height: 60rpx;
+  background: #cacaca6b;
+}
+
+/* 橙色主按钮（覆盖微信默认绿色） */
+button[type="primary"], .wx-button[type="primary"] {
+  background: #ff9500;
+  color: #fff;
+  border: 1px solid #ff9500;
+}
+button[type="primary"]:active, .wx-button[type="primary"]:active {
+  background: #e67c00;
+  border-color: #e67c00;
+}
+
+/* 实付款金额 */
+.total {
+  color: #e64340;
+  font-weight: bold;
+  margin-right: 20rpx;
+  font-size: 32rpx;
+}
+
+/* 操作按钮样式（更小） */
+
+/* 删除未用到的样式：无 */
+
+.order-footer-btns button:first-child {
+  margin-left: auto;
+}

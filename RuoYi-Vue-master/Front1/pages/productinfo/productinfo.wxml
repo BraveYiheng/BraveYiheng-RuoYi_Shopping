@@ -1,0 +1,48 @@
+<!-- 商品详情页主容器 -->
+<view wx:if="{{loading}}">加载中...</view>
+<view wx:elif="{{error}}">{{error}}</view>
+<view wx:else class="productinfo-container">
+  <!-- 商品大图，顶部展示商品主图 -->
+  <image class="product-image" src="http://localhost:8081{{product.productImg}}" mode="aspectFit" />
+
+  <!-- 价格与促销区，包含价格、券后、包邮、促销等标签 -->
+  <view class="price-section">
+    <view class="price-left">
+      <!-- 商品价格 -->
+      <text class="price">￥{{product.productPrice}}</text>
+      <!-- 券后、包邮标签 -->
+      <text class="tag">{{product.productSign}}</text>
+      <text class="tag">包邮</text>
+    </view>
+    <view class="price-right">
+      <!-- 促销标签 -->
+      <text class="tag">促销</text>
+    </view>
+  </view>
+
+  <!-- 商品标题，展示商品名称和卖点 -->
+  <view class="product-title">
+    {{product.productDescribe}}
+  </view>
+
+  <!-- 属性区，展示优惠、服务等属性标签 -->
+  <view class="attr-section">
+    <view class="attr-item">品牌：{{product.productBrand}}</view>
+    <view class="attr-item">规格：{{product.productSize}}</view>
+    <view class="attr-item">包装：{{product.productPackage}}</view>
+    <view class="attr-item">类型：{{product.productTypeName}}</view>
+    <view class="attr-item">库存：{{product.productCount}}</view>
+    <view class="attr-item">生产日期：{{product.productCreateTime}}</view>
+  </view>
+
+
+  <!-- 底部操作栏，包含加入购物车和立即购买按钮，悬浮固定底部 -->
+  <view class="bottom-bar">
+    <view class="bar-btn bar-btn-add" bindtap="addToCart">
+      加入购物车
+    </view>
+    <view class="bar-btn bar-btn-buy" bindtap="buyNow">
+      立即购买
+    </view>
+  </view>
+</view>

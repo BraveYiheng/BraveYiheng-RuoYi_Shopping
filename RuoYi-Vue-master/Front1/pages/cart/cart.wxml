@@ -1,0 +1,42 @@
+<view class="cart-container">
+  <view class="cart-header">
+    <text class="cart-title">购物车</text>
+  </view>
+
+  <view class="cart-list">
+    <block wx:for="{{cartItems}}" wx:key="cartId">
+      <view class="cart-item">
+        <checkbox checked="{{item.selected}}" bindtap="toggleSelect" data-index="{{index}}" />
+        
+        <image class="item-img" src="{{item.cartProductUrl}}" mode="aspectFill" />
+
+        <view class="item-info">
+          <text class="item-title">{{item.cartProductName}}</text>
+          <view class="item-bottom">
+            <text class="item-price">¥{{item.cartProductPrice}}</text>
+            <view class="item-stepper">
+              <text class="stepper-btn" bindtap="decreaseCount" data-index="{{index}}">-</text>
+              <text class="stepper-num">{{item.productCount}}</text>
+              <text class="stepper-btn" bindtap="increaseCount" data-index="{{index}}">+</text>
+            </view>
+          </view>
+          <text class="item-total">小计：¥{{item.totalPrice}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="cart-footer">
+    <view class="footer-left">
+      <checkbox checked="{{allSelected}}" bindtap="toggleAllSelect" />
+      <text>全选</text>
+    </view>
+    <view class="footer-right">
+      <view class="total-price">
+        <text>合计：</text>
+        <text class="price">¥{{totalPrice}}</text>
+      </view>
+      <button class="checkout-btn" bindtap="goToCheckout">结算</button>
+    </view>
+  </view>
+</view>

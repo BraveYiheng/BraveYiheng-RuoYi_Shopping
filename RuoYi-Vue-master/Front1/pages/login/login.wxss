@@ -1,0 +1,44 @@
+/* pages/login/login.wxss */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  /* 内容居中 */
+  align-items: center; 
+  height: 100vh;
+  background: #f8f8f8;
+}
+.login-input {
+  width: 80%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+}
+.login-btn {
+  width: 80%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #007aff;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.12);
+}
+.login-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #222;
+  margin-top: 150px;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.login-logo {
+  height: 1700px;
+  width: 170px;
+  margin: 40px auto 20px auto;
+  display: block;
+}

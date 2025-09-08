@@ -1,0 +1,35 @@
+<!--pages/my/my.wxml-->
+<view class="my-container">
+  <view class="my-bg-card">
+    <view class="my-avatar-row">
+      <image class="my-avatar" src="http://localhost:8081{{userPhoto}}" mode="aspectFill"></image>
+      <view class="my-info">
+        <view class="my-nickname">{{userName}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="my-section" bindtap="goToOrderCenter">
+    <view class="my-section-title-row">
+      <text class="my-section-title">订单中心</text>
+      <text class="my-section-more">全部 ></text>
+    </view>
+    <view class="my-order-icons" >
+      <view class="my-order-item" bindtap="goToOrderTab" data-tab="1"><image src="../../images/order-pay.png" class="my-order-icon"></image><text>待付款</text></view>
+      <view class="my-order-item" bindtap="goToOrderTab" data-tab="2"><image src="../../images/order-send.png" class="my-order-icon"></image><text>待发货</text></view>
+      <view class="my-order-item" bindtap="goToOrderTab" data-tab="3"><image src="../../images/order-receive.png" class="my-order-icon"></image><text>待收货</text></view>
+      <view class="my-order-item" bindtap="goToOrderTab" data-tab="4"><image src="../../images/order-refund.png" class="my-order-icon"></image><text>退款</text></view>
+    </view>
+  </view>
+
+  <view class="my-section">
+    <view class="my-section-title">基础服务</view>
+    <view class="my-service-grid">
+      <view class="my-service-item" bindtap="goToAddress"><image src="../../images/location.png" class="my-service-icon"></image><text>收货地址</text></view>
+      <view class="my-service-item"><image src="../../images/star.png" class="my-service-icon"></image><text>我的收藏</text></view>
+      <view class="my-service-item"><image src="../../images/clock.png" class="my-service-icon"></image><text>浏览足迹</text></view>
+      <view class="my-service-item"><image src="../../images/headset.png" class="my-service-icon"></image><text>帮助与客服</text></view>
+      <view class="my-service-item" bindtap="goToSetting"><image src="../../images/setting.png" class="my-service-icon"></image><text>设置</text></view>
+    </view>
+  </view>
+</view>
