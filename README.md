@@ -1,1 +1,2 @@
-前端代码在mater/Front1中
+基于若依的电商平台项目
+前端代码在master/Front1中
